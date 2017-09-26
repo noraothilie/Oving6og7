@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Live panel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            getOrders();
+            setInterval(reloadOrders, 10000);
+
+            function reloadOrders() {
+                $('#myTable').DataTable().ajax.reload();
+            }
+            function getOrders() {
+                $('#myTable').DataTable({
+                    ajax: {
+                        url: 'rest/order',
+                        dataSrc: ''
+                    },
+                    columns: [
+                        {data: 'id'},
+                        {data: 'tableNr'},
+                        {data: 'fromTime'},
+                        {data: 'toTime'},
+                        {data: 'antPers'},
+                        {data: 'ap'},
+                        {data: 'din'},
+                        {data: 'des'},
+                        {data: 'drink'},
+                        {data: 'antDrinks'}
+                    ]
+                })
+            }
+            $("#delete").click(function () {
+                $.ajax({
+                    url: 'rest/order/' + $("#deleteId").val(),
+                    type: 'DELETE',
+                    success: function(result) {
+                        $('#myTable').DataTable().ajax.reload();
+                    }
+                });
+            });
+
+        });
+
+    </script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse bg-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">NOMI</a>
+        </div>
+        <ul class="nav navbar-nav navbar-left">
+            <!--<li class="active"><a href="#">Home</a></li>-->
+            <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li><a href="order.html">Order</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            <li class="active"><a href="#">Live panel</a></li>
+        </ul>
+
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Live panel</h2>
+    <p>The table shows placed orders and is to be used by chefs and waiters.</p>
+    <div class="table-responsive">
+        <table id="myTable" class="table">
+            <thead>
+            <tr><th>ID</th><th>Table number</th><th>From time</th><th>To time</th><th>Number of people</th><th>Appetizer</th><th>Main course</th><th>Desert</th><th>Drink</th><th>Number of drinks</th></tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+<div style="text-align: center;">
+    <input id="deleteId" type="text" value="deleteId" >
+    <button id="delete">Delete</button>
+</div>
+
+
+<br>
+
+</body>
+</html>

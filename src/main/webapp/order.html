@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#order").click(function () {
+                $.ajax({
+                    url: 'rest/order',
+                    type: 'POST',
+                    data: JSON.stringify({
+                        fromTime: $("#fromTime").val(),
+                        toTime: $("#toTime").val(),
+                        antPers: $("#antPers").val(),
+                        ap: $("#ap").val(),
+                        din: $("#din").val(),
+                        des: $("#des").val(),
+                        drink: $("#drink").val(),
+                        antDrinks: $("#antDrinks").val()
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    complete: function(result) {
+                        alert("Thank you for your order!");
+                        alert(result.responseText);
+                        $('#myTable').DataTable().ajax.reload();
+                    }
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<nav class="navbar navbar-inverse bg-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">NOMI</a>
+        </div>
+        <ul class="nav navbar-nav navbar-left">
+            <li><a href="index.html"><span class="glyphicon glyphicon-home"></span></a></li>
+            <li class="active"><a href="#">Order</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            <li><a href="livepanel.html">Live panel</a></li>
+        </ul>
+
+        <div>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2>Online ordering</h2>
+    <p>Complete the fields below to book a table and choose your courses</p>
+    <br>
+
+    <form>
+        <h3><span class="glyphicon glyphicon-user"></span> Contact information</h3>
+        <div class="form-group">
+            <label for="fname">First name:</label>
+            <input type="text" class="form-control" id="fname">
+        </div>
+        <div class="form-group">
+            <label for="lname">Last name:</label>
+            <input type="text" class="form-control" id="lname">
+        </div>
+        <div class="form-group">
+            <label for="tlph">Telephone:</label>
+            <input type="number" class="form-control" id="tlph">
+        </div>
+        <br>
+        <br>
+
+        <div class="form-group">
+            <label for="fromTime">Time:</label>
+            <input type="time" step="1800" class="form-control" id="fromTime">
+        </div>
+
+        <!--<div class="form-group">
+            <label for="fromTime">Time</label>
+            <select class="form-control" id="fromTime">
+                <option>Choose time</option>
+                <option>13.00</option>
+                <option>13.30</option>
+                <option>14.00</option>
+                <option>14.30</option>
+                <option>15.00</option>
+                <option>15.30</option>
+                <option>16.00</option>
+                <option>16.30</option>
+                <option>17.00</option>
+                <option>17.30</option>
+                <option>18.00</option>
+                <option>18.30</option>
+                <option>19.00</option>
+                <option>19.30</option>
+                <option>20.00</option>
+                <option>20.30</option>
+                <option>21.00</option>
+                <option>21.30</option>
+                <option>22.00</option>
+            </select>
+        </div>-->
+
+        <div class="form-group">
+            <label for="antPers">Number of persons:</label>
+            <input type="number" min="1" class="form-control" id="antPers">
+        </div>
+
+        <br>
+
+
+        <h3><span class="glyphicon glyphicon-cutlery"></span> Food</h3>
+        <h4>Appetizer</h4>
+        <div class="form-group">
+            <select class="form-control" id="ap">
+                <option>None</option>
+                <option>Artichoke Dip</option>
+                <option>King Crab Salad</option>
+                <option>Lobster</option>
+            </select>
+        </div>
+
+        <h4>Dinner</h4>
+        <div class="form-group">
+
+            <select class="form-control" id="din">
+                <option>None</option>
+                <option>Pepperoni pizza</option>
+                <option>Pork Tenderloin</option>
+                <option>New Style Sashimi</option>
+                <option>Spicy Seafood Soup</option>
+            </select>
+        </div>
+
+
+        <h4>Desert</h4>
+        <div class="form-group">
+
+            <select class="form-control" id="des">
+                <option>None</option>
+                <option>Apple Pie</option>
+                <option>Brownie</option>
+                <option>Ice Cream</option>
+                <option>Cheesecake</option>
+            </select>
+        </div>
+        <br>
+
+
+        <h4><span class="glyphicon glyphicon-glass"></span> Drinks</h4>
+        <div class="form-group">
+
+            <select class="form-control" id="drink">
+                <option>None</option>
+                <option>Red Wine</option>
+                <option>White Wine</option>
+                <option>Soft Drink</option>
+                <option>Water</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="antDrinks">Number of drinks:</label>
+            <input type="number" min="0" class="form-control" id="antDrinks">
+        </div>
+
+        <br>
+        <h4><span class="glyphicon glyphicon-credit-card"></span> Payment information</h4>
+        <p>Please fill out the fields below</p>
+        <div class="form-group">
+            <label for="cardName">Cardholders name:</label>
+            <input type="text" class="form-control" id="cardName">
+        </div>
+        <div class="form-group">
+            <label for="cardNumber">Card Number:</label>
+            <input type="number" class="form-control" id="cardNumber" placeholder="xxxx xxxx xxxx xxxx">
+        </div>
+        <div class="form-group">
+            <label for="exp">Expiration date:</label>
+            <input type="number" class="form-control" id="exp" placeholder="mm/yy">
+        </div>
+        <div class="form-group">
+            <label for="secCode">Security Code:</label>
+            <input type="number" class="form-control" id="secCode" placeholder="xxx">
+        </div>
+
+
+        <br>
+        <button id="order">Place order</button>
+        <br>
+
+
+    </form>
+</div>
+
+
+
+
+</body>
+</html>
+
+
+<!-- $(document).ready(function(){
+
+var quantitiy=0;
+$('.quantity-right-plus').click(function(e){
+
+// Stop acting like a button
+e.preventDefault();
+// Get the field name
+var quantity = parseInt($('#quantity').val());
+
+// If is not undefined
+
+$('#quantity').val(quantity + 1);
+
+
+// Increment
+
+});
+
+$('.quantity-left-minus').click(function(e){
+// Stop acting like a button
+e.preventDefault();
+// Get the field name
+var quantity = parseInt($('#quantity').val());
+
+// If is not undefined
+
+// Increment
+if(quantity>0){
+$('#quantity').val(quantity - 1);
+}
+});
+
+});-->
+
+<!--<div class="well well-sm">Peperoni pizza</div>-->
+<!--<ul class="list-group">
+    <li class="list-group-item"> <span class="badge">5</span></li>
+    <li class="list-group-item">Deleted <span class="badge">5</span></li>
+    <li class="list-group-item">Warnings <span class="badge">3</span></li>
+</ul>
+
+<div class="col-lg-2">
+    <div class="input-group">
+        <span class="input-group-btn">
+            <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                <span class="glyphicon glyphicon-minus"></span>
+            </button>
+        </span>
+        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+        <span class="input-group-btn">
+            <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+        </span>
+    </div>
+</div>-->
