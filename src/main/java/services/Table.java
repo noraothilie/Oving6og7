@@ -41,7 +41,7 @@ public class Table {
                         return false;
                     } else if (dateBetween(fromTime1, toTime1, toTime2)){
                         return false;
-                    } else if ((fromTime2.compareTo(fromTime1) < 0) && ((fromTime2.compareTo(toTime1)) > 0)) {
+                    } else if ((fromTime2.compareTo(fromTime1) < 0) && ((toTime2.compareTo(toTime1)) > 0)) {
                         return false;
                     } else if((fromTime2.compareTo(fromTime1) == 0) && ((toTime2.compareTo(toTime1)) == 0)) {
                         return false;
