@@ -7,6 +7,7 @@ import java.util.Date;
 /**
  * Created by Nora on 24.09.2017.
  */
+
 public class Table {
     ArrayList<Order> orders = new ArrayList<>();
     private int tableNr;
