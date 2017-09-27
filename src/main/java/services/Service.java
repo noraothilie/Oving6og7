@@ -85,6 +85,6 @@ public class Service {
 
     @DELETE
     @Path("/{id}")
-    public void deleteOrder(@PathParam("id") int id){ orders.remove(id);}
+    public void deleteOrder(@PathParam("id") int id){ orders.remove(id); }
 
 }
