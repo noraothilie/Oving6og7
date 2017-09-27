@@ -12,6 +12,7 @@
     <script>
         $(document).ready(function () {
             $("#order").click(function () {
+                console.log("Sender bestilling");
                 $.ajax({
                     url: 'rest/order',
                     type: 'POST',
@@ -27,11 +28,13 @@
                     }),
                     contentType: 'application/json; charset=utf-8',
                     dataType: 'json',
-                    complete: function(result) {
+                    success: function(result) {
                         alert("Thank you for your order!");
-                        alert(result.responseText);
-                        $('#myTable').DataTable().ajax.reload();
+                    },
+                    error: function (data) {
+                        alert("feil: " + data);
                     }
+
                 });
             });
         });
@@ -64,7 +67,7 @@
 
 <div class="container">
     <h2>Online ordering</h2>
-    <p>Complete the fields below to book a table and choose your courses</p>
+    <p>Complete the fields below to book a table.</p>
     <br>
 
     <form>
@@ -88,32 +91,6 @@
             <label for="fromTime">Time:</label>
             <input type="time" step="1800" class="form-control" id="fromTime">
         </div>
-
-        <!--<div class="form-group">
-            <label for="fromTime">Time</label>
-            <select class="form-control" id="fromTime">
-                <option>Choose time</option>
-                <option>13.00</option>
-                <option>13.30</option>
-                <option>14.00</option>
-                <option>14.30</option>
-                <option>15.00</option>
-                <option>15.30</option>
-                <option>16.00</option>
-                <option>16.30</option>
-                <option>17.00</option>
-                <option>17.30</option>
-                <option>18.00</option>
-                <option>18.30</option>
-                <option>19.00</option>
-                <option>19.30</option>
-                <option>20.00</option>
-                <option>20.30</option>
-                <option>21.00</option>
-                <option>21.30</option>
-                <option>22.00</option>
-            </select>
-        </div>-->
 
         <div class="form-group">
             <label for="antPers">Number of persons:</label>
@@ -197,7 +174,6 @@
             <input type="number" class="form-control" id="secCode" placeholder="xxx">
         </div>
 
-
         <br>
         <button id="order">Place order</button>
         <br>
@@ -206,67 +182,6 @@
     </form>
 </div>
 
-
-
-
 </body>
 </html>
 
-
-<!-- $(document).ready(function(){
-
-var quantitiy=0;
-$('.quantity-right-plus').click(function(e){
-
-// Stop acting like a button
-e.preventDefault();
-// Get the field name
-var quantity = parseInt($('#quantity').val());
-
-// If is not undefined
-
-$('#quantity').val(quantity + 1);
-
-
-// Increment
-
-});
-
-$('.quantity-left-minus').click(function(e){
-// Stop acting like a button
-e.preventDefault();
-// Get the field name
-var quantity = parseInt($('#quantity').val());
-
-// If is not undefined
-
-// Increment
-if(quantity>0){
-$('#quantity').val(quantity - 1);
-}
-});
-
-});-->
-
-<!--<div class="well well-sm">Peperoni pizza</div>-->
-<!--<ul class="list-group">
-    <li class="list-group-item"> <span class="badge">5</span></li>
-    <li class="list-group-item">Deleted <span class="badge">5</span></li>
-    <li class="list-group-item">Warnings <span class="badge">3</span></li>
-</ul>
-
-<div class="col-lg-2">
-    <div class="input-group">
-        <span class="input-group-btn">
-            <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
-                <span class="glyphicon glyphicon-minus"></span>
-            </button>
-        </span>
-        <input type="text" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
-        <span class="input-group-btn">
-            <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
-                <span class="glyphicon glyphicon-plus"></span>
-            </button>
-        </span>
-    </div>
-</div>-->

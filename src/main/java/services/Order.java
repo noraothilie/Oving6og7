@@ -63,5 +63,4 @@ public class Order {
     public int getTableNr(){ return tableNr; }
     public void setTableNr(int tableNr){ this.tableNr = tableNr; }
 
-
 }
